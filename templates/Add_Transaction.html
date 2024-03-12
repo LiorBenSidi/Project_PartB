@@ -16,19 +16,7 @@
 {% if first_try == 1 %}
     {% if is_ID == 1 %}
         {% if is_not_Tran == 1 %}
-            <h2>Last 10 Transactions:</h2>
-            <table border="=1" width="40%">
-                <th>Date</th>
-                <th>Investor ID</th>
-                <th>Transaction Sum</th>
-                {% for Q4 in sql_res4 %}
-                    <tr>
-                        <td>{{ Q4.Date }} <br></td>
-                        <td>{{ Q4.InvestorID }}<br></td>
-                        <td>{{ Q4.TransactionSum }}<br></td>
-                    </tr>
-                {% endfor %}
-            </table><br><br>
+            <h2>Transaction added successfully</h2>
         {% else %}
             <h2>You have already made a transaction today</h2>
         {% endif %}
@@ -36,6 +24,20 @@
         <h2>Investor ID does not exist</h2>
     {% endif %}
 {% endif %}
+<br>
+<h2>Last 10 Transactions:</h2>
+<table border="=1" width="40%">
+    <th>Date</th>
+    <th>Investor ID</th>
+    <th>Transaction Sum</th>
+    {% for Q4 in sql_res4 %}
+        <tr>
+            <td>{{ Q4.Date }} <br></td>
+            <td>{{ Q4.InvestorID }}<br></td>
+            <td>{{ Q4.TransactionSum }}<br></td>
+        </tr>
+    {% endfor %}
+</table><br><br>
 
 <a href="index">Home Page</a><br>
 <a href="Query_Results">Query Results</a><br>
