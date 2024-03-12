@@ -42,6 +42,7 @@ def Query_Results(request):
     return render(request, 'Query_Results.html',
                   {'sql_res': sql_res, 'sql_res2': sql_res2, 'sql_res3': sql_res3})
 
+
 def Add_Transaction(request):
     first_try = 0
     is_ID = 0
@@ -52,7 +53,7 @@ def Add_Transaction(request):
                               FROM Transactions
                               ORDER BY tDate DESC;
                               """)
-        sql_res5 = dictfetchall(cursor)
+            sql_res4 = dictfetchall(cursor)
 
         first_try = 1
         new_id = request.POST["ID"]
@@ -64,7 +65,7 @@ def Add_Transaction(request):
                               """, [new_id])
             row = cursor.fetchone()
             if not row:
-                return render(request, 'Add_Transaction.html', {'sql_res5': sql_res5,
+                return render(request, 'Add_Transaction.html', {'sql_res4': sql_res4,
                                                                 'first_try': first_try, 'is_ID': is_ID})
             else:
                 is_ID = 1
@@ -78,7 +79,7 @@ def Add_Transaction(request):
                     row = cursor.fetchone()
                     if not row:
                         return render(request, 'Add_Transaction.html',
-                                      {'sql_res5': sql_res5,
+                                      {'sql_res4': sql_res4,
                                        'first_try': first_try,
                                        'is_ID': is_ID,
                                        'is_not_Tran': is_not_Tran})
@@ -90,12 +91,12 @@ def Add_Transaction(request):
                             cursor.execute("""SELECT MAX(tDate) AS MaxDay
                                               FROM Stock;
                                               """)
-                        today = dictfetchall(cursor)
+                            today = dictfetchall(cursor)
 
-                        sql_res4 = Transactions(ID=new_id,
+                        new_Transaction = Transactions(ID=new_id,
                                               TAmount=new_amount,
                                               tdate=today)
-                        sql_res4.save()
+                        new_Transaction.save()
 
                         #TODO: update the amount in the investor table
                         with connection.cursor() as cursor:
@@ -106,7 +107,7 @@ def Add_Transaction(request):
                                 """, [new_amount, new_id])
 
                         return render(request, 'Add_Transaction.html',
-                                                      {'sql_res5': sql_res5,
+                                                      {'sql_res4': sql_res4,
                                                              'first_try' : first_try,
                                                              'is_ID' : is_ID,
                                                              'is_not_Tran' : is_not_Tran})

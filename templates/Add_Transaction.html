@@ -13,6 +13,7 @@
     <input type="submit">
 </form>
 <br>
+
 {% if first_try == 1 %}
     {% if is_ID == 1 %}
         {% if is_not_Tran == 1 %}
@@ -25,12 +26,13 @@
     {% endif %}
 {% endif %}
 <br>
+
 <h2>Last 10 Transactions:</h2>
 <table border="=1" width="40%">
     <th>Date</th>
     <th>Investor ID</th>
     <th>Transaction Sum</th>
-    {% for Q4 in sql_res4 %}
+    {% for Q5 in sql_res5 %}
         <tr>
             <td>{{ Q4.Date }} <br></td>
             <td>{{ Q4.InvestorID }}<br></td>
