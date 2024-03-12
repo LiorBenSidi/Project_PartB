@@ -1,0 +1,53 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Query Result</title>
+</head>
+<body>
+<link rel="stylesheet" href="{%  static 'style.css' %}">
+<h1>TechniStoncks - Israel Website of Stocks</h1>
+<h2>Qurery 1:</h2>
+<table border="=1" width="40%">
+    <th>Name</th>
+    <th>Total Sum</th>
+    {% for Q1 in sql_res %}
+        <tr>
+            <td>{{ Q1.Name }} <br></td>
+            <td>{{ Q1.TotalSum }}<br></td>
+        </tr>
+    {% endfor %}
+</table><br><br>
+
+<h2>Qurery 2:</h2>
+<table border="=1" width="40%">
+    <th>Symbol</th>
+    <th>Name</th>
+    <th>Quantity</th>
+    {% for Q2 in sql_res2 %}
+        <tr>
+            <td>{{ Q2.Symbol }} <br></td>
+            <td>{{ Q2.Name }}<br> </td>
+            <td>{{ Q2.Quantity }} <br></td>
+        </tr>
+    {% endfor %}
+</table><br><br>
+
+<h2>Qurery 3:</h2>
+<table border="=1" width="40%">
+    <th>Symbol</th>
+    <th>Buyers Number</th>
+    {% for Q3 in sql_res3 %}
+        <tr>
+            <td>{{ Q3.Symbol }}<br> </td>
+            <td>{{ Q3.TotalBuyers }} <br></td>
+        </tr>
+    {% endfor %}
+</table><br><br>
+
+<a href="index">Home Page</a><br>
+<a href="Add_Transaction">Add Transaction</a><br>
+<a href="Buy_Stocks">Buy Stocks</a><br><br>
+
+</body>
+</html>
