@@ -1,0 +1,61 @@
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Buy Stocks</title>
+</head>
+<link rel="stylesheet" href="{%  static 'style.css' %}">
+<h1>TechniStoncks - Israel Website of Stocks</h1>
+<h2>Buy Stocks</h2>
+<form method="POST">
+    {% csrf_token %}
+    ID: <textarea name="ID" rows="1" cols="50" required></textarea><br>
+    Company: <textarea name="Symbol" rows="1" cols="50" required></textarea><br>
+    Quantity: <textarea name="Quantity" rows="1" cols="50" required></textarea><br>
+    <input type="submit">
+</form>
+<br>
+{% if first_try == 1 %}
+    {% if is_ID == 0 %}
+        {% if is_symbol == 0 %}
+            <h2>ID and Symbol does not exist</h2>
+        {% else %}
+            <h2>ID does not exist</h2>
+        {% endif %}
+    {% elif is_symbol == 0 %}
+        <h2>Symbol does not exist</h2>
+    {% endif %}
+    {% if is_ID == 1 and is_symbol == 1 %}
+        {% if is_large == 0 %}
+            {% if is_not_Buy == 0 %}
+                <h2>You have already bought this stock today</h2>
+                <h2>and you don't have enough money in your trading account</h2>
+            {% else %}
+                <h2>you don't have enough money in your trading account</h2>
+            {% endif %}
+        {% elif is_not_Buy == 0 %}
+            <h2>You have already bought this stock today</h2>
+        {% endif %}
+    {% endif %}
+{% endif %}
+
+
+<br>
+<h2>Last 10 Stock Buys:</h2>
+<table border="=1" width="40%">
+    <th>Date</th>
+    <th>Investor ID</th>
+    <th>Symbol</th>
+    <th>Quantity</th>
+    {% for Q5 in sql_res5 %}
+        <tr>
+            <td>{{ Q5.tDate }} <br></td>
+            <td>{{ Q5.ID }}<br></td>
+            <td>{{ Q5.Symbol }}<br></td>
+            <td>{{ Q5.BQuantity }}<br></td>
+        </tr>
+    {% endfor %}
+</table><br><br>
+
+<a href="index">Home Page</a><br>
+<a href="Query_Results">Query Results</a><br>
+<a href="Add_Transaction">Add Transaction</a><br><br>

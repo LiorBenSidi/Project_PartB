@@ -33,10 +33,3 @@ form{
     text-align: center;
     margin: 0 auto;
 }
-
-.rectangle{
-    background-color: #f5dd5d;
-    text-align: center;
-    border: 5px outset black;
-    width: 500px;
-}
