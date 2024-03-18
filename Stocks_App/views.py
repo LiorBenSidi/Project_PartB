@@ -178,7 +178,6 @@ def Buy_Stocks(request):
                               GROUP BY S.Symbol;
                               """, [new_symbol])
             row = cursor.fetchone()
-            print(row)
             if row: # Symbol exists
                 is_symbol = 1
 
@@ -220,10 +219,10 @@ def Buy_Stocks(request):
 
         with connection.cursor() as cursor:
             cursor.execute("""SELECT I.ID
-                                FROM Investor I, Stock S,(SELECT MAX(tDate) AS MaxDay
-                                                  FROM Stock) LastDay
+                                FROM Investor I, Stock S ,(SELECT MAX(tDate) AS MaxDay
+                                                           FROM Stock) LastDay
                                 WHERE I.ID = %s AND S.Symbol = %s AND S.tDate = LastDay.MaxDay
-                                AND I.Amount >= S.Price * (%s)
+                                      AND I.Amount >= S.Price * (%s)
                                 GROUP BY I.ID;
                                   """, [new_id, new_symbol, new_quantity])
             row = cursor.fetchone()
