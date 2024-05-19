@@ -9,7 +9,8 @@ from django.db import models
 
 
 class Buying(models.Model):
-    tdate = models.OneToOneField('Stock', models.DO_NOTHING, db_column='tDate', primary_key=True)  # Field name made lowercase. The composite primary key (tDate, ID, Symbol) found, that is not supported. The first column is selected.
+    # Field name made lowercase. The composite primary key (tDate, ID, Symbol) found, that is not supported. The first column is selected.
+    tdate = models.OneToOneField('Stock', models.DO_NOTHING, db_column='tDate', primary_key=True)
     id = models.ForeignKey('Investor', models.DO_NOTHING, db_column='ID')  # Field name made lowercase.
     symbol = models.ForeignKey('Stock', models.DO_NOTHING, db_column='Symbol', related_name='+')
     bquantity = models.IntegerField(db_column='BQuantity', blank=True, null=True)  # Field name made lowercase.
@@ -42,7 +43,8 @@ class Investor(models.Model):
 
 
 class Stock(models.Model):
-    symbol = models.OneToOneField(Company, models.DO_NOTHING, db_column='Symbol', primary_key=True)  # Field name made lowercase. The composite primary key (Symbol, tDate) found, that is not supported. The first column is selected.
+    # Field name made lowercase. The composite primary key (Symbol, tDate) found, that is not supported. The first column is selected.
+    symbol = models.OneToOneField(Company, models.DO_NOTHING, db_column='Symbol', primary_key=True)
     tdate = models.DateField(db_column='tDate')  # Field name made lowercase.
     price = models.FloatField(db_column='Price', blank=True, null=True)  # Field name made lowercase.
 
@@ -53,7 +55,8 @@ class Stock(models.Model):
 
 
 class Transactions(models.Model):
-    tdate = models.DateField(db_column='tDate', primary_key=True)  # Field name made lowercase. The composite primary key (tDate, ID) found, that is not supported. The first column is selected.
+    # Field name made lowercase. The composite primary key (tDate, ID) found, that is not supported. The first column is selected.
+    tdate = models.DateField(db_column='tDate', primary_key=True)
     id = models.ForeignKey(Investor, models.DO_NOTHING, db_column='ID')  # Field name made lowercase.
     tamount = models.IntegerField(db_column='TAmount', blank=True, null=True)  # Field name made lowercase.
 

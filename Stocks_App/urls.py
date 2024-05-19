@@ -8,3 +8,4 @@ urlpatterns = [
     path('Add_Transaction', views.Add_Transaction, name='Add_Transaction'),
     path('Buy_Stocks', views.Buy_Stocks, name='Buy_Stocks'),
 ]
+
